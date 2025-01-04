@@ -11,6 +11,7 @@ RUN yarn
 COPY . .
 
 RUN yarn run build
+RUN yarn install --production && yarn cache clean
 
 # STAGE: PRODUCTION
 
