@@ -1,0 +1,19 @@
+Tech ->
+
+1 - Partindo do ponto inicial, acredito em atacar os processos manuais, além de incluir novas etapas automatizadas.
+2 - Desconheço o desenvolvimento em delphi entretanto, acredito que o processo pode ser aplicado aos dois projetos em andamento.
+3 - Implementação de novos processos Definition of Ready, Definition of Done.
+4 - O dev só pega uma task sabendo os critérios de aceite. Para Ready, o código só sera entregue com testes unitários. O legado, sem teste, entra automaticamente em débito técnico.
+5 - Inclusão de novas tasks de testes e2e, regressão e smoke, para garantir que as features atuais, não foram impactadas por novas features/tasks.
+6 - Todo bug que foi corrigido, obrigatoriamente deve ter um teste para garantir que nao se repita.
+7 - Code Review obrigatório, os devs não precisam mais enviar o pacote para ops, isso sera automatico pelo github ou similar. Também é necessário definir um padrão de desenvolvimento, algo como gitflow por exemplo.
+8 - Adicionar Docker aos projetos facilita a equidade entre os desenvolvedores e implantação.
+9 - O deploy passa por mudanças, sendo automatizado primeiramente para o novo ambiente de testes. Em seguida, o build é movido ao ambiente produtivo. Isso pode ser feito através de jenkins ou github actions por exemplo.
+10 - No step de testes, através da pipeline criada, são implementados os testes automatizados. O Definition of ready do processo de testes, é ter o ok, dos testes automatizados, mesmo que poucos no inicio, ja é uma segurança constante.
+11 - Além dos testes automatizados e manuais, o PO, ou responsável pela feature precisa dar o aval para o deploy, que passa a ser disparado por uma pipeline. Já programado um rollback quando necessário, podendo ser automatizado também por uma pipeline.
+12 - No passo de Monitoramento, o primeiro step, seria configurar um health check com alertas e notificações, e em seguida alguma ferramenta especializada como prometheus, para gerar dados sobre a aplicação, como tempo de resposta, erros, e uso de gpu.
+13 - Voltando ao desenvolvimento, os devs, ja cientes da importancia de testes, sera adicionada uma etapa antes da entrega do código, para validação automatica. Ao abrir um PR, o mesmo só é disponivel para revisao quando atendido critérios de aceite, como positivo em todos os testes unitarios. Tambem podemos incluir etapas de lint ou validação estatica de código, sonar e similares.
+14 - Quando um teste unitario falha, ou etapa de validação falha, o processo volta ao inicio, sendo necessário que o dev avalie o pq sua task não foi liberada. O mesmo acontece, quando um teste e2e falha, nesse ponto, a definir, se teremos uma avaliação prévia de ops ou do próprio dev.
+15 - Com o passar do tempo, temos dados da nossa aplicação, o monitoramento pode ser evoluido, incluindo metricas para alerta, criação de dashboards, e disparo de mensagens, assim como criação de tasks de melhoria de performance na aplicação.
+
+Penso que isso é um começo.
