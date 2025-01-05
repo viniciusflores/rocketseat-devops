@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0.7-ubuntu2204
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=mypassword
+    volumes:
+      - db:/data/db
+      - db-config:/data/configdb
+    networks:
+      - my-app-network
+
+
+  nextjs-api:
+    build:
+      context: .
+    container_name: nextjs-api
+    environment:
+      - MONGODB_URI=mongodb://admin:mypassword@mongodb:27017/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    networks:
+      - my-app-network
+
+networks:
+  my-app-network:
+    name: my-app-network
+    external: true
+    driver: bridge
+
+volumes:
+  db:
+  db-config:
+
+
+# version: '3'
+# services:
+#   myapplication:
+#     image: mongodb/mongodb-community-server:6.0-ubi8
+#     environment:
+#       - CONN_STR=mongodb://user:pass@mongodb
+#     command: '/bin/bash -c "sleep 5; mongosh $$CONN_STR --eval \"show dbs;\""'
+#     depends_on:
+#       - mongodb
+#   mongodb:
+#     image: mongodb/mongodb-community-server:6.0-ubi8
+#     environment:
+#       - MONGO_INITDB_ROOT_USERNAME=user
+#       - MONGO_INITDB_ROOT_PASSWORD=pass
+#     volumes:
+#       - type: bind
+#         source: ./data
+#         target: /data/db
